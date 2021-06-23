@@ -1,0 +1,2 @@
+This is sample text file. The purpose of this file to provide input if the word world exist.
+If the word exist then it will print message.
