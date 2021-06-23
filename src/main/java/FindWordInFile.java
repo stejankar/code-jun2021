@@ -17,8 +17,8 @@ public class FindWordInFile {
 
     public static String wordInFile(String inputFile, SparkSession spark, String word) {
         Dataset<String> lines = spark.read().textFile(inputFile).cache();
-        long linesWithWord = lines.filter((FilterFunction<String>) line -> line.contains(word)).count();
-        if(linesWithWord > 0L) {
+        Dataset<String> linesWithWord = lines.filter((FilterFunction<String>) line -> line.contains(word));
+        if(!linesWithWord.rdd().isEmpty()) {
             return String.format("Keyword \"%s\" exists in given file", word);
         }
         return String.format("Keyword \"%s\" does not exist in given file", word);
